@@ -1,0 +1,13 @@
+{
+  "name": "minebot-ssj3-bedrock-core",
+  "version": "2.1.0",
+  "description": "Minebot SSJ3 — Bedrock Core v2.1 | RakNet/UDP nativo | BDS 1.26.x + Celular LAN",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "bedrock-protocol": "github:PrismarineJS/bedrock-protocol",
+    "chalk": "^4.1.2"
+  }
+}
