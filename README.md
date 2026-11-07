@@ -22,22 +22,22 @@ Unlike Java Edition's TCP stream, Bedrock Edition operates over raw UDP/RakNet d
 ```mermaid
 flowchart TD
     subgraph BDS["Bedrock Dedicated Server (BDS)"]
-        RakNet["RakNet Datagram Stream\n(UDP 19132)"]
+        RakNet["RakNet Datagram Stream<br/>(UDP 19132)"]
     end
 
     subgraph PROTOCOL_LAYER["Binary Packet Dissection Tier"]
         Listener["bedrock-protocol Connection Adapter"]
-        PacketHandler["Real-Time Packet Decoders\n(Entities, Chunk Data, Player Auth)"]
+        PacketHandler["Real-Time Packet Decoders<br/>(Entities, Chunk Data, Player Auth)"]
         RakNet <--> Listener
         Listener --> PacketHandler
     end
 
     subgraph FSM["Finite State Machine & Action Engine"]
-        StateStore["Global State Store\n(Single Source of Truth)"]
-        Survival["Survival Module\n(Auto-Eat, Critical HP Retreat)"]
-        Combat["Combat Heuristics\n(Chase & Melee Packet Dispatch)"]
-        Navigation["Exploration Loop\n(Golden Spiral & Coordinate Traversal)"]
-        Reconnector["Connection Manager\n(Exponential Backoff Reconnect)"]
+        StateStore["Global State Store<br/>(Single Source of Truth)"]
+        Survival["Survival Module<br/>(Auto-Eat, Critical HP Retreat)"]
+        Combat["Combat Heuristics<br/>(Chase & Melee Packet Dispatch)"]
+        Navigation["Exploration Loop<br/>(Golden Spiral & Coordinate Traversal)"]
+        Reconnector["Connection Manager<br/>(Exponential Backoff Reconnect)"]
         
         PacketHandler --> StateStore
         StateStore --> Survival
