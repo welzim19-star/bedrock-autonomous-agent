@@ -21,23 +21,23 @@ Unlike Java Edition's TCP stream, Bedrock Edition operates over raw UDP/RakNet d
 
 ```mermaid
 flowchart TD
-    subgraph BDS["Bedrock Dedicated Server (BDS)"]
-        RakNet["RakNet Datagram Stream<br/>(UDP 19132)"]
+    subgraph BDS["Bedrock Dedicated Server"]
+        RakNet["RakNet Datagram Stream"]
     end
 
-    subgraph PROTOCOL_LAYER["Binary Packet Dissection Tier"]
-        Listener["bedrock-protocol Connection Adapter"]
-        PacketHandler["Real-Time Packet Decoders<br/>(Entities, Chunk Data, Player Auth)"]
+    subgraph PROTOCOL_LAYER["Packet Dissection Tier"]
+        Listener["Connection Adapter"]
+        PacketHandler["Packet Decoders"]
         RakNet <--> Listener
         Listener --> PacketHandler
     end
 
-    subgraph FSM["Finite State Machine & Action Engine"]
-        StateStore["Global State Store<br/>(Single Source of Truth)"]
-        Survival["Survival Module<br/>(Auto-Eat, Critical HP Retreat)"]
-        Combat["Combat Heuristics<br/>(Chase & Melee Packet Dispatch)"]
-        Navigation["Exploration Loop<br/>(Golden Spiral & Coordinate Traversal)"]
-        Reconnector["Connection Manager<br/>(Exponential Backoff Reconnect)"]
+    subgraph FSM["Finite State Machine"]
+        StateStore["Global State Store"]
+        Survival["Survival Module"]
+        Combat["Combat Heuristics"]
+        Navigation["Exploration Loop"]
+        Reconnector["Connection Manager"]
         
         PacketHandler --> StateStore
         StateStore --> Survival
@@ -47,7 +47,7 @@ flowchart TD
     end
 
     subgraph COMMANDS["Command Plane"]
-        ChatRouter["Chat Command Dispatcher (!prefix)"]
+        ChatRouter["Chat Command Dispatcher"]
         StateStore --> ChatRouter
     end
 ```

@@ -21,23 +21,23 @@ Diferente da Java Edition que utiliza TCP sequencial, a Bedrock Edition opera so
 
 ```mermaid
 flowchart TD
-    subgraph BDS["Bedrock Dedicated Server (BDS)"]
-        RakNet["Fluxo de Datagramas RakNet\n(UDP 19132)"]
+    subgraph BDS["Bedrock Dedicated Server"]
+        RakNet["Fluxo de Datagramas RakNet"]
     end
 
-    subgraph PROTOCOL_LAYER["Camada de Dissecação de Pacotes"]
-        Listener["Adaptador de Conexão bedrock-protocol"]
-        PacketHandler["Decodificadores em Tempo Real\n(Entidades, Chunks, Autenticação)"]
+    subgraph PROTOCOL_LAYER["Dissecação de Pacotes"]
+        Listener["Adaptador de Conexão"]
+        PacketHandler["Decodificadores em Tempo Real"]
         RakNet <--> Listener
         Listener --> PacketHandler
     end
 
-    subgraph FSM["Máquina de Estados & Motor de Ação"]
-        StateStore["Estado Global Centralizado\n(Single Source of Truth)"]
-        Survival["Módulo de Sobrevivência\n(Auto-Eat, Fuga com HP Baixo)"]
-        Combat["Heurística de Combate\n(Perseguição & Ataque Direto)"]
-        Navigation["Loop de Exploração\n(Espiral Áurea & Trajeto por Coordenadas)"]
-        Reconnector["Gerenciador de Conexão\n(Reconexão com Backoff Exponencial)"]
+    subgraph FSM["Máquina de Estados & Motor"]
+        StateStore["Estado Global Centralizado"]
+        Survival["Módulo de Sobrevivência"]
+        Combat["Heurística de Combate"]
+        Navigation["Loop de Exploração"]
+        Reconnector["Gerenciador de Conexão"]
         
         PacketHandler --> StateStore
         StateStore --> Survival
@@ -47,7 +47,7 @@ flowchart TD
     end
 
     subgraph COMMANDS["Plano de Comandos"]
-        ChatRouter["Roteador de Comandos via Chat (!prefixo)"]
+        ChatRouter["Roteador de Comandos"]
         StateStore --> ChatRouter
     end
 ```
